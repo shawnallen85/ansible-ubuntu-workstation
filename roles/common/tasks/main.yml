@@ -1,0 +1,17 @@
+---
+- name: Get Ubuntu release number
+  command: lsb_release -r -s
+  register: lsb_release
+
+- name: Check if apt-transport-https is installed
+  command: dpkg-query -W apt-transport-https
+  register: apt_transport_https
+  failed_when: apt_transport_https.rc > 1
+  changed_when: apt_transport_https.rc == 1
+
+- name: Install apt-transport-https
+  apt:
+    name: apt-transport-https
+    state: present
+    update_cache: yes
+  when: (apt_transport_https.rc > 0)

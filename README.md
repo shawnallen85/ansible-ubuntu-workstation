@@ -32,6 +32,12 @@ Installs Ansible.
 
 This only needs to be ran on the system you will be running Ansible from.
 
+## Applying Playbook
+
+```bash
+ansible-playbook -i ~/ansible-hosts.yml -K main.yml
+```
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
