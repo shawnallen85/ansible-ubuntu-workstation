@@ -20,6 +20,12 @@ This should be ran on all systems that will be maintained by Ansible.
 
 This will also add a line to the `/etc/sudoers` file that allows for passwordless sudo.
 
+You can access this user utilizing sudo:
+
+```bash
+sudo -u ansible -i
+```
+
 ## setup-ansible.sh
 
 Installs Ansible.
