@@ -1,0 +1,48 @@
+---
+- name: Add flat-remix repository
+  apt_repository:
+    repo: ppa:daniruiz/flat-remix
+
+- name: Install flat-remix
+  package:
+    name: flat-remix
+    state: present
+    update_cache: true
+
+- name: Install flat-remix-gtk
+  package:
+    name: flat-remix-gtk
+    state: present
+    update_cache: false
+
+- name: Install flat-remix-gnome
+  package:
+    name: flat-remix-gnome
+    state: present
+    update_cache: false
+
+- name: Install libglib2.0-dev-bin
+  package:
+    name: libglib2.0-dev-bin
+    state: present
+    update_cache: false
+
+- name: Install imagemagick
+  package:
+    name: imagemagick
+    state: present
+    update_cache: false
+
+- name: Clone flat-remix-gnome
+  shell: git clone https://github.com/daniruiz/flat-remix-gnome.git /var/lib/flat-remix-gnome
+#  git:
+#    repo: 'https://github.com/daniruiz/flat-remix-gnome.git'
+#    dest: /tmp/flat-remix-gnome
+#    update: yes
+#    version: "20191116"
+#    accept_hostkey: yes
+#    recursive: false
+  changed_when: False
+
+- name: Install flat-remix-gnome
+  shell: cd /var/lib/flat-remix-gnome && make && make install && cd ~ && rm -fr /var/lib/flat-remix-gnome
