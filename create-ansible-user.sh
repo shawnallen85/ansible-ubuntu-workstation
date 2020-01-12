@@ -25,6 +25,7 @@ ANSIBLE_PASSWORD=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 
 mkdir -p /home/${ANSIBLE_USER}/.ssh
 cp ${SSH_AUTHORIZED_KEY_FILE} /home/${ANSIBLE_USER}/.ssh/authorized_keys
 useradd -d /home/${ANSIBLE_USER} ${ANSIBLE_USER}
+cp /var/lib/AccountsService/users/gdm /var/lib/AccountsService/users/${ANSIBLE_USER}
 echo "${ANSIBLE_USER}:${ANSIBLE_PASSWORD}" | chpasswd
 usermod -aG ${SUDO_GROUP} ${ANSIBLE_USER}
 chown -R ${ANSIBLE_USER}:${ANSIBLE_USER} /home/${ANSIBLE_USER}/
