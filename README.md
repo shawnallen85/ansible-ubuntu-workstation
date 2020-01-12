@@ -4,13 +4,6 @@ A set of scripts and playbooks for maintaining consistent Ubuntu workstations.
 
 ## create-ansible-user.sh
 
-Execution example:
-
-```bash
-curl https://example.org/ansible-user.pub -o ansible-user.pub
-curl -s https://raw.githubusercontent.com/shawnallen85/ansible-ubuntu-workstation/master/create-ansible-user.sh | sudo bash
-```
-
 Creates a user named ansible with a random password.
 
 It assumes that a file, "ansible-user.pub", exists in your current working directory.
@@ -31,6 +24,24 @@ You can access this user utilizing sudo:
 
 ```bash
 sudo -u ansible -i
+```
+
+Execution example:
+
+Get ansible-user.pub via web host on node:
+
+```bash
+curl https://example.org/ansible-user.pub -o ansible-user.pub
+```
+
+Copy ansible-user.pub via scp from host:
+
+```bash
+scp ansible-user.pub node:/home/${USER}
+```
+
+```bash
+curl -s https://raw.githubusercontent.com/shawnallen85/ansible-ubuntu-workstation/master/create-ansible-user.sh | sudo bash
 ```
 
 ## setup-ansible.sh
