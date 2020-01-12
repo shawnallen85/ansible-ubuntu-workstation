@@ -2,10 +2,12 @@
 - name: Get Ubuntu release number
   command: lsb_release -s -r
   register: lsb_release
+  changed_when: False
 
 - name: Get Ubuntu release number, LTS
   shell: echo "$(lsb_release -s -r | sed 's/..$//')04"
   register: lsb_release_lts
+  changed_when: False
 
 - name: Upgrade all packages to the latest version
   apt:

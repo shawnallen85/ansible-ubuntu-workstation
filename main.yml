@@ -7,5 +7,4 @@
   become_method: sudo
   roles:
     - common
-    - role: dotnet
-      tags: ["dotnet"]
+    - dotnet
