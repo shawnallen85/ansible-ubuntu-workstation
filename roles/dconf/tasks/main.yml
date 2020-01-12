@@ -49,5 +49,10 @@
     src: 00-shell.j2
     dest: /etc/dconf/db/local.d/00-shell
 
+- name: Create /etc/dconf/db/local.d/00-wm-preferences
+  template:
+    src: 00-wm-preferences.j2
+    dest: /etc/dconf/db/local.d/00-wm-preferences
+
 - name: Update dconf
   command: dconf update
