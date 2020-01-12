@@ -9,11 +9,11 @@
   package:
     name: packages-microsoft-prod
     state: absent
-  when: (packages_microsoft_prod.rc == 0)
+  when: (packages_microsoft_prod.rc == 0 and packages_microsoft_prod.stdout != "packages-microsoft-prod	1.0-ubuntu" ~ lsb_release_lts.stdout ~ ".1")
 
 - name: Install packages-microsoft-prod
   apt:
-    deb: https://packages.microsoft.com/config/ubuntu/{{ lsb_release.stdout }}/packages-microsoft-prod.deb
+    deb: https://packages.microsoft.com/config/ubuntu/{{ lsb_release_lts.stdout }}/packages-microsoft-prod.deb
 
 - name: Check if dotnet-sdk-3.1 is installed
   command: dpkg-query -W dotnet-sdk-3.1
@@ -25,10 +25,11 @@
   package:
     name: "dotnet-sdk-3.1"
     state: absent
-  when: (dotnet_sdk_3_1.rc == 0)
+  when: (dotnet_sdk_3_1.rc == 0 and dotnet_sdk_3_1.stdout != "dotnet-sdk-3.1	" ~ dotnet_sdk_3_1_version)
 
 - name: Install dotnet-sdk-3.1
   package:
     name: "dotnet-sdk-3.1={{ dotnet_sdk_3_1_version }}"
     state: present
     update_cache: true
+  when: (dotnet_sdk_3_1.rc > 0)
