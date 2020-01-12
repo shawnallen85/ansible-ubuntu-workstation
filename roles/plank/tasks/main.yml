@@ -1,0 +1,10 @@
+---
+- name: Install plank
+  apt:
+    name: plank
+    state: present
+    update_cache: yes
+
+- name: Install plank themes
+  command: cp -R /var/lib/ansible-workstation-assets/plank/themes/ /usr/share/plank/
+  changed_when: False

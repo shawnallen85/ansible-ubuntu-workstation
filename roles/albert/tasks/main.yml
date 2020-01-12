@@ -1,0 +1,25 @@
+---
+- name: Download manuelschneid3r apt key
+  get_url:
+    url: https://download.opensuse.org/repositories/home:manuelschneid3r/xUbuntu_{{ lsb_release.stdout }}/Release.key
+    dest: /tmp/manuelschneid3r.key
+
+- name: Add manuelschneid3r apt key
+  shell: apt-key add /tmp/manuelschneid3r.key
+
+#  apt_key:
+#    url: https://download.opensuse.org/repositories/home:manuelschneid3r/xUbuntu_{{ lsb_release.stdout }}/Release.key
+#    state: present
+
+- name: Add manuelschneid3r repository
+  shell: echo 'deb http://download.opensuse.org/repositories/home:/manuelschneid3r/xUbuntu_{{ lsb_release.stdout }}/ /' > /etc/apt/sources.list.d/manuelschneid3r.list
+#  apt_repository:
+#    repo: deb http://download.opensuse.org/repositories/home:/manuelschneid3r/xUbuntu_{{ lsb_release.stdout }}/ /
+#    state: present
+#    filename: home:manuelschneid3r.list
+
+- name: Install albert
+  package:
+    name: albert
+    state: present
+    update_cache: true

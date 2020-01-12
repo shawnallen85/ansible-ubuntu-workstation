@@ -2,8 +2,8 @@
 - name: Check if packages-microsoft-prod is installed
   command: dpkg-query -W packages-microsoft-prod
   register: packages_microsoft_prod
-  failed_when: packages_microsoft_prod.rc > 1
-  changed_when: packages_microsoft_prod.rc == 1
+  changed_when: False
+  failed_when: False
 
 - name: Remove packages-microsoft-prod
   package:
@@ -14,12 +14,13 @@
 - name: Install packages-microsoft-prod
   apt:
     deb: https://packages.microsoft.com/config/ubuntu/{{ lsb_release_lts.stdout }}/packages-microsoft-prod.deb
+  when: ((packages_microsoft_prod.rc == 0 and packages_microsoft_prod.stdout != "packages-microsoft-prod	1.0-ubuntu" ~ lsb_release_lts.stdout ~ ".1") or packages_microsoft_prod.rc == 1)
 
 - name: Check if dotnet-sdk-3.1 is installed
   command: dpkg-query -W dotnet-sdk-3.1
   register: dotnet_sdk_3_1
-  failed_when: dotnet_sdk_3_1.rc > 1
-  changed_when: dotnet_sdk_3_1.rc == 1
+  changed_when: False
+  failed_when: False
 
 - name: Remove dotnet-sdk-3.1
   package:
