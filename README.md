@@ -26,8 +26,6 @@ You can access this user utilizing sudo:
 sudo -u ansible -i
 ```
 
-Execution example:
-
 Get ansible-user.pub via web host on node:
 
 ```bash
@@ -39,6 +37,8 @@ Copy ansible-user.pub via scp from host:
 ```bash
 scp ansible-user.pub node:/home/${USER}
 ```
+
+Once ansible-user.pub is on the node, run the following on the node:
 
 ```bash
 curl -s https://raw.githubusercontent.com/shawnallen85/ansible-ubuntu-workstation/master/create-ansible-user.sh | sudo bash
