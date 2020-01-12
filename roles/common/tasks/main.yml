@@ -52,3 +52,21 @@
     name: gnome-shell-extensions
     state: present
     update_cache: no
+
+- name: Install flatpak
+  apt:
+    name: flatpak
+    state: present
+    update_cache: no
+
+- name: Install gnome-software-plugin-flatpak
+  apt:
+    name: gnome-software-plugin-flatpak
+    state: present
+    update_cache: no
+
+- name: Install snapd
+  apt:
+    name: snapd
+    state: present
+    update_cache: no
