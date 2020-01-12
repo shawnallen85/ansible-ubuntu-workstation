@@ -25,3 +25,8 @@
     name: albert
     state: present
     update_cache: true
+
+- name: Create /etc/xdg/autostart/albert.desktop
+  template:
+    src: autostart.j2
+    dest: /etc/xdg/autostart/albert.desktop

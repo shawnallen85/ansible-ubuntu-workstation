@@ -52,31 +52,3 @@
     name: gnome-shell-extensions
     state: present
     update_cache: no
-
-- name: Check if google-chrome-stable is installed
-  command: dpkg-query -W google-chrome-stable
-  register: google_chrome_stable
-  changed_when: False
-  failed_when: False
-
-- name: Install Google Chrome
-  apt:
-    deb: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-  when: (google_chrome_stable.rc > 0)
-
-- name: Check if gitkraken is installed
-  command: dpkg-query -W gitkraken
-  register: gitkraken
-  changed_when: False
-  failed_when: False
-
-- name: Install GitKraken
-  apt:
-    deb: https://release.gitkraken.com/linux/gitkraken-amd64.deb
-  when: (gitkraken.rc > 0)
-
-- name: Install nautilus-dropbox
-  apt:
-    name: nautilus-dropbox
-    state: present
-    update_cache: no

@@ -7,9 +7,6 @@
   become_method: sudo
   roles:
     - common
-    - dotnet
-    - chrome
-    - gitkraken
     - dconf
     - flat-remix
     - albert

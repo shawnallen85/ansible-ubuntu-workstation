@@ -1,0 +1,58 @@
+---
+- name: Create /etc/dconf/profile/user
+  template:
+    src: user.j2
+    dest: /etc/dconf/profile/user
+
+- name: Create /etc/dconf/db/local.d
+  file:
+    path: /etc/dconf/db/local.d
+    state: directory
+
+- name: Create /etc/dconf/db/local.d/00-background
+  template:
+    src: 00-background.j2
+    dest: /etc/dconf/db/local.d/00-background
+
+- name: Create /etc/dconf/db/local.d/00-datetime
+  template:
+    src: 00-datetime.j2
+    dest: /etc/dconf/db/local.d/00-datetime
+
+- name: Create /etc/dconf/db/local.d/00-interface
+  template:
+    src: 00-interface.j2
+    dest: /etc/dconf/db/local.d/00-interface
+
+- name: Create /etc/dconf/db/local.d/00-screensaver
+  template:
+    src: 00-screensaver.j2
+    dest: /etc/dconf/db/local.d/00-screensaver
+
+- name: Create /etc/dconf/db/local.d/00-user-theme
+  template:
+    src: 00-user-theme.j2
+    dest: /etc/dconf/db/local.d/00-user-theme
+
+- name: Create /etc/dconf/db/local.d/00-desktop-icons
+  template:
+    src: 00-desktop-icons.j2
+    dest: /etc/dconf/db/local.d/00-desktop-icons
+
+- name: Create /etc/dconf/db/local.d/00-Defcon27
+  template:
+    src: 00-Defcon27.j2
+    dest: /etc/dconf/db/local.d/00-Defcon27
+
+- name: Create /etc/dconf/db/local.d/00-dash-to-dock
+  template:
+    src: 00-dash-to-dock.j2
+    dest: /etc/dconf/db/local.d/00-dash-to-dock
+
+- name: Create /etc/dconf/db/local.d/00-shell
+  template:
+    src: 00-shell.j2
+    dest: /etc/dconf/db/local.d/00-shell
+
+- name: Update dconf
+  command: dconf update

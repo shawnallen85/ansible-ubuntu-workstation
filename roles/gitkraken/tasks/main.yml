@@ -1,0 +1,11 @@
+---
+- name: Check if gitkraken is installed
+  command: dpkg-query -W gitkraken
+  register: gitkraken
+  changed_when: False
+  failed_when: False
+
+- name: Install GitKraken
+  apt:
+    deb: https://release.gitkraken.com/linux/gitkraken-amd64.deb
+  when: (gitkraken.rc > 0)

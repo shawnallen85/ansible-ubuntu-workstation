@@ -34,7 +34,7 @@
     update_cache: false
 
 - name: Clone flat-remix-gnome
-  shell: git clone https://github.com/daniruiz/flat-remix-gnome.git /var/lib/flat-remix-gnome
+  shell: git clone https://github.com/daniruiz/flat-remix-gnome.git /var/lib/flat-remix-gnome || cd /var/lib/flat-remix-gnome && git pull
 #  git:
 #    repo: 'https://github.com/daniruiz/flat-remix-gnome.git'
 #    dest: /tmp/flat-remix-gnome
@@ -44,5 +44,28 @@
 #    recursive: false
   changed_when: False
 
+- name: Update login-background
+  shell: cd /var/lib/flat-remix-gnome/src/assets && find . -type f -name "login-background" -exec cp -T /var/lib/ansible-workstation-assets/wallpapers/{{ wallpaper }}/login-background {} \;
+  when: (wallpaper != "")
+
 - name: Install flat-remix-gnome
-  shell: cd /var/lib/flat-remix-gnome && make && make install && cd ~ && rm -fr /var/lib/flat-remix-gnome
+  shell: cd /var/lib/flat-remix-gnome && make && make install
+
+- name: Copy default wallpaper
+  shell: cp /var/lib/ansible-workstation-assets/wallpaper/{{ wallpaper }}/{{ wallpaper }}.jpg /usr/share/backgrounds/{{ wallpaper }}.jpg
+  when: (wallpaper != "")
+
+- name: Create /etc/dconf/db/local.d/01-background
+  template:
+    src: 01-background.j2
+    dest: /etc/dconf/db/local.d/01-background
+  when: (wallpaper != "")
+
+- name: Create /etc/dconf/db/local.d/01-screensaver
+  template:
+    src: 01-screensaver.j2
+    dest: /etc/dconf/db/local.d/01-screensaver
+  when: (wallpaper != "")
+
+- name: Update dconf
+  command: dconf update
