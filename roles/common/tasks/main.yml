@@ -65,6 +65,9 @@
     state: present
     update_cache: no
 
+- name: Add Flathub repository
+  command: flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
 - name: Install snapd
   apt:
     name: snapd

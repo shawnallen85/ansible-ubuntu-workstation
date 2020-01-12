@@ -34,7 +34,7 @@ chmod 644 /home/${ANSIBLE_USER}/.ssh/authorized_keys
 
 # echo "${ANSIBLE_USER} password is ${ANSIBLE_PASSWORD}"
 
-echo "Add the following line to the appropriate ~/.ssh/known_hosts file:"
-cat /etc/ssh/ssh_host_ed25519_key.pub
+# echo "Add the following line to the appropriate ~/.ssh/known_hosts file:"
+# cat /etc/ssh/ssh_host_ed25519_key.pub
 
 echo "${ANSIBLE_USER}  ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers >/dev/null

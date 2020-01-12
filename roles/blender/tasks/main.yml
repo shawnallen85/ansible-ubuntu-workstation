@@ -1,0 +1,5 @@
+---
+- name: Install Blender
+  flatpak:
+    name: org.blender.Blender
+    state: present
