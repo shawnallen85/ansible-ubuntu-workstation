@@ -1,5 +1,4 @@
 ---
 - name: Install VLC
-  flatpak:
-    name: org.videolan.VLC
-    state: present
+  snap:
+    name: vlc

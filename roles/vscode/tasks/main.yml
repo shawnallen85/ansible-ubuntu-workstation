@@ -1,5 +1,5 @@
 ---
 - name: Install Visual Studio Code
-  flatpak:
-    name: com.visualstudio.code
-    state: present
+  snap:
+    name: code
+    classic: yes

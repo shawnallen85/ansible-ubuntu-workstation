@@ -1,5 +1,5 @@
 ---
 - name: Install Slack
-  flatpak:
-    name: com.slack.Slack
-    state: present
+  snap:
+    name: slack
+    classic: yes

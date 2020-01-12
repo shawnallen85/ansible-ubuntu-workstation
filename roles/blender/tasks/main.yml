@@ -1,5 +1,5 @@
 ---
 - name: Install Blender
-  flatpak:
-    name: org.blender.Blender
-    state: present
+  snap:
+    name: blender
+    classic: yes
