@@ -29,11 +29,6 @@
     src: 00-screensaver.j2
     dest: /etc/dconf/db/local.d/00-screensaver
 
-- name: Create /etc/dconf/db/local.d/00-user-theme
-  template:
-    src: 00-user-theme.j2
-    dest: /etc/dconf/db/local.d/00-user-theme
-
 - name: Create /etc/dconf/db/local.d/00-desktop-icons
   template:
     src: 00-desktop-icons.j2

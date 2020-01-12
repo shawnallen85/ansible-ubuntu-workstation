@@ -33,16 +33,20 @@
     state: present
     update_cache: false
 
+- name: Check flat-remix-gnome
+  stat:
+    path: /var/lib/flat-remix-gnome
+  register: flat_remix_gnome
+
 - name: Clone flat-remix-gnome
-  shell: git clone https://github.com/daniruiz/flat-remix-gnome.git /var/lib/flat-remix-gnome || cd /var/lib/flat-remix-gnome && git pull
-#  git:
-#    repo: 'https://github.com/daniruiz/flat-remix-gnome.git'
-#    dest: /tmp/flat-remix-gnome
-#    update: yes
-#    version: "20191116"
-#    accept_hostkey: yes
-#    recursive: false
+  shell: git clone https://github.com/daniruiz/flat-remix-gnome.git /var/lib/flat-remix-gnome
   changed_when: False
+  when: ((flat_remix_gnome.stat.isdir is defined and flat_remix_gnome.stat.isdir) == False)
+
+- name: Pull flat-remix-gnome
+  shell: cd /var/lib/flat-remix-gnome && git pull
+  changed_when: False
+  when: (flat_remix_gnome.stat.isdir is defined and flat_remix_gnome.stat.isdir)
 
 - name: Update login-background
   shell: cd /var/lib/flat-remix-gnome/src/assets && find . -type f -name "login-background" -exec cp -T /var/lib/ansible-workstation-assets/wallpapers/{{ wallpaper }}/login-background {} \;
@@ -66,6 +70,16 @@
     src: 01-screensaver.j2
     dest: /etc/dconf/db/local.d/01-screensaver
   when: (wallpaper != "")
+
+- name: Create /etc/dconf/db/local.d/01-user-theme
+  template:
+    src: 01-user-theme.j2
+    dest: /etc/dconf/db/local.d/01-user-theme
+
+- name: Create /etc/dconf/db/local.d/01-interface
+  template:
+    src: 01-interface.j2
+    dest: /etc/dconf/db/local.d/01-interface
 
 - name: Update dconf
   command: dconf update
